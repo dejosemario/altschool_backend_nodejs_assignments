@@ -21,3 +21,6 @@
         res.end(JSON.stringify({message: "Endpoint not found"}));
     }
  }
+
+
+ module.exports = getAuthors;
