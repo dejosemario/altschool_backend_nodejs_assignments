@@ -6,7 +6,7 @@ const { authenticate } = require("./authentication");
 const port = 8900;
 const hostname = "localhost";
 
-async function requestHandler(req, res) {
+function requestHandler(req, res) {
   const { headers, methods, url } = req;
   if (url === "/") {
     res.statusCode = 200;
