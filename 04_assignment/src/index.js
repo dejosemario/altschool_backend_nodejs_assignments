@@ -1,40 +1,27 @@
-const http = require("http");
-const getBooks = require("./books");
-const getAuthors = require("./authors");
+import express from "express";
+import logger from "./logger.js";
+import getAuthors from "../routes/authors.js";
+
+const app = express();
+
+//middleware
+app.use(express.json());
+app.use("/authors", getAuthors);
+app.use(logger);
 
 const port = 8900;
 const hostname = "localhost";
 
-async function requestHandler(req, res) {
-  const { headers, methods, url } = req;
-  if (url === "/") {
-    res.statusCode = 200;
-    res.end(
-      JSON.stringify({
-        message:
-          "This is the root endpoint, use /books or /authors to get data",
-      })
-    );
-  }
+
+app.get("/", (req, res) => {
+  res.send("Welcome to Authors API!");
+});
 
 
-  
+app.all("*", (req, res) => {
+  res.send(`Page doesn't exit, Kindly navigate to the accurate route`);
+});
 
-  if (url === "/authors") {
-    authenticate(req, res)
-      .then(() => {
-        getAuthors(req, res);
-      })
-      .catch((err) => {
-        console.log(err);
-        res.writeHead(400);
-        res.end(JSON.stringify({ message: err }));
-      });
-  }
-}
-
-const server = http.createServer(requestHandler);
-
-server.listen(port, hostname, () => {
+app.listen(port, hostname, () => {
   console.log(`Server running at http://localhost:${port}/`);
 });
