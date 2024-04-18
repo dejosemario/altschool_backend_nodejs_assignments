@@ -1,5 +1,5 @@
 import User from "../models/user.schema.js";
-import { ErrorWithStatus } from "../exceptions/error-with-status.exception.js";
+import { ErrorWithStatus } from "../middlewares/error.js";
 import bcrypt from "bcryptjs";
 import Jwt from "jsonwebtoken";
 
