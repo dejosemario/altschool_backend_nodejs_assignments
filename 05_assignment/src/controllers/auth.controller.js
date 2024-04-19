@@ -1,5 +1,7 @@
 import * as authService from "../services/auth.service.js";
+
 import * as validation from "../validations/auth.validation.js";
+import {ErrorWithStatus} from "../middlewares/error.js";
 
 export async function register(req, res) {
   try {
@@ -9,7 +11,7 @@ export async function register(req, res) {
       email,
       password,
       confirmPassword
-    );
+    );//
     res
       .status(201)
       .json({ message: "User registered successfully", user: user });
@@ -21,9 +23,10 @@ export async function register(req, res) {
 export async function login(req, res) {
   try {
     const { email, password } = req.body;
+    console.log(email, password);
     const token = await authService.login(email, password);
     res.json({ message: "Login successful", accessToken: token });
-  } catch {
-    res.status(400).json({ message: error.message });
+  } catch(error){
+    res.status(400).json({ messagei: error.message });
   }
 }
