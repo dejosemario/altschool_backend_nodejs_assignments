@@ -2,12 +2,14 @@ import express from "express";
 import authRoute from "./routes/auth.route.js";
 import connectDB from "./config/db.js";
 import {errorHandler} from "./middlewares/error.js";
+import postRoute from "./routes/post.route.js";
 
 const app = express();
 
 //middleware
 app.use(express.json());
 app.use('/api/auth', authRoute);
+app.use('/api/posts', postRoute);
 app.use(errorHandler);
 
 const port = process.env.PORT || 8900;

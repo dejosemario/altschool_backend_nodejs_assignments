@@ -18,14 +18,15 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-    }
+    },
+
     // createdAt, updatedAt
   },
   {
     timestamps: true,
+   
   }
 );
-
 
 const User = mongoose.model("User", userSchema);
 export default User;

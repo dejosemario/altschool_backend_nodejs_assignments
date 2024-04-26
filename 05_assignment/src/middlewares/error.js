@@ -49,3 +49,5 @@ export const errorHandler = (err, req, res, next) => {
   const cleanMessage = message.replace(/"/g, '');
   res.status(status).json({ success, message: cleanMessage });
 };
+
+
